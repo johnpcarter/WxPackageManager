@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">interface</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">wx.packages.manager._priv.git</value>
+  <value name="is_public">false</value>
+  <value name="encodeutf8">true</value>
+  <value name="shared">CQpwdWJsaWMgc3RhdGljIGZpbmFsIGNsYXNzIEN1c3RvbVNzaFNlc3Npb25GYWN0b3J5IGV4dGVu
+ZHMgU3NoZFNlc3Npb25GYWN0b3J5IHsKCgkKICAgIHByaXZhdGUgZmluYWwgUGF0aCBwcml2YXRl
+S2V5RmlsZTsKCiAgICBwdWJsaWMgQ3VzdG9tU3NoU2Vzc2lvbkZhY3RvcnkoU3RyaW5nIHByaXZh
+dGVLZXlGaWxlKSB7CiAgICAgICAgdGhpcy5wcml2YXRlS2V5RmlsZSA9IFBhdGgub2YocHJpdmF0
+ZUtleUZpbGUpOwogICAgfQoKICAgIEBPdmVycmlkZQogICAgcHVibGljIEZpbGUgZ2V0U3NoRGly
+ZWN0b3J5KCkgewogICAgICAgIAogICAgCXJldHVybiBwcml2YXRlS2V5RmlsZS5nZXRQYXJlbnQo
+KS50b0ZpbGUoKTsKICAgIH0KCi8vIFJldHVybiBwYXRocyB0byBwcml2YXRlIGtleSBmaWxlcwog
+ICAgQE92ZXJyaWRlCiAgICBwcm90ZWN0ZWQgTGlzdDxQYXRoPiBnZXREZWZhdWx0SWRlbnRpdGll
+cyhGaWxlIHNzaERpcikgewogICAgICAgIAogICAgCXJldHVybiBDb2xsZWN0aW9ucy5zaW5nbGV0
+b25MaXN0KHByaXZhdGVLZXlGaWxlKTsKICAgIH0KCn0KCnB1YmxpYyBzdGF0aWMgY2xhc3MgQ3Vz
+dG9tQ3JlZGVudGlhbFByb3ZpZGVyIGV4dGVuZHMgQ3JlZGVudGlhbHNQcm92aWRlciB7CgkKICAg
+IHByaXZhdGUgZmluYWwgU3RyaW5nIHBhc3NwaHJhc2U7CgogICAgcHVibGljIEN1c3RvbUNyZWRl
+bnRpYWxQcm92aWRlcihTdHJpbmcgcGFzc3BocmFzZSkgewogICAgICAgIHRoaXMucGFzc3BocmFz
+ZSA9IHBhc3NwaHJhc2U7CiAgICB9CgogICAgQE92ZXJyaWRlCiAgICBwdWJsaWMgYm9vbGVhbiBp
+c0ludGVyYWN0aXZlKCkgewogICAgICAgIC8vIFNldCB0aGlzIGFjY29yZGluZyB0byB5b3VyIHJl
+cXVpcmVtZW50CiAgICAgICAgcmV0dXJuIGZhbHNlOwogICAgfQoKICAgIEBPdmVycmlkZQogICAg
+cHVibGljIGJvb2xlYW4gc3VwcG9ydHMoQ3JlZGVudGlhbEl0ZW0uLi4gaXRlbXMpIHsKICAgICAg
+ICAvLyBTZXQgdGhpcyBhY2NvcmRpbmcgdG8geW91ciByZXF1aXJlbWVudAogICAgICAgIHJldHVy
+biB0cnVlOwogICAgfQoKICAgIEBPdmVycmlkZQogICAgcHVibGljIGJvb2xlYW4gZ2V0KFVSSWlz
+aCB1cmksIENyZWRlbnRpYWxJdGVtLi4uIGl0ZW1zKQogICAgICAgICAgICB0aHJvd3MgVW5zdXBw
+b3J0ZWRDcmVkZW50aWFsSXRlbSB7CgogICAgICAgIGZvciAoQ3JlZGVudGlhbEl0ZW0gaXRlbSA6
+IGl0ZW1zKSB7CiAgICAgICAgICAgIGlmIChpdGVtIGluc3RhbmNlb2YgQ3JlZGVudGlhbEl0ZW0u
+SW5mb3JtYXRpb25hbE1lc3NhZ2UpIHsKICAgICAgICAgICAgICAgIGNvbnRpbnVlOwogICAgICAg
+ICAgICB9CiAgICAgICAgICAgIGlmIChpdGVtIGluc3RhbmNlb2YgQ3JlZGVudGlhbEl0ZW0uWWVz
+Tm9UeXBlKSB7CiAgICAgICAgICAgICAgICAvLyBTZXQgdGhpcyBhY2NvcmRpbmcgdG8geW91ciBy
+ZXF1aXJlbWVudAogICAgICAgICAgICAgICAgKChDcmVkZW50aWFsSXRlbS5ZZXNOb1R5cGUpIGl0
+ZW0pLnNldFZhbHVlKHRydWUpOwogICAgICAgICAgICB9IGVsc2UgaWYgKGl0ZW0gaW5zdGFuY2Vv
+ZiBDcmVkZW50aWFsSXRlbS5DaGFyQXJyYXlUeXBlKSB7CiAgICAgICAgICAgICAgICBpZiAocGFz
+c3BocmFzZSAhPSBudWxsKSB7CiAgICAgICAgICAgICAgICAgICAgKChDcmVkZW50aWFsSXRlbS5D
+aGFyQXJyYXlUeXBlKSBpdGVtKQogICAgICAgICAgICAgICAgICAgICAgICAgICAgLnNldFZhbHVl
+KHBhc3NwaHJhc2UudG9DaGFyQXJyYXkoKSk7CiAgICAgICAgICAgICAgICB9IGVsc2UgewogICAg
+ICAgICAgICAgICAgICAgIHJldHVybiBmYWxzZTsKICAgICAgICAgICAgICAgIH0KICAgICAgICAg
+ICAgfSBlbHNlIGlmIChpdGVtIGluc3RhbmNlb2YgQ3JlZGVudGlhbEl0ZW0uU3RyaW5nVHlwZSkg
+ewogICAgICAgICAgICAgICAgaWYgKHBhc3NwaHJhc2UgIT0gbnVsbCkgewogICAgICAgICAgICAg
+ICAgICAgICgoQ3JlZGVudGlhbEl0ZW0uU3RyaW5nVHlwZSkgaXRlbSkKICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIC5zZXRWYWx1ZShwYXNzcGhyYXNlKTsKICAgICAgICAgICAgICAgIH0gZWxz
+ZSB7CiAgICAgICAgICAgICAgICAgICAgcmV0dXJuIGZhbHNlOwogICAgICAgICAgICAgICAgfQog
+ICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgcmV0dXJuIGZhbHNlOwogICAgICAg
+ICAgICB9CiAgICAgICAgfQogICAgICAgIHJldHVybiB0cnVlOwogICAgfQp9CgoJLypwcml2YXRl
+IHN0YXRpYyBUcmFuc3BvcnRDb25maWdDYWxsYmFjayBzc2hDYWxsYmFjayhTdHJpbmcgcGF0aFRv
+UHJpdmF0ZUtleSkgewoJCgkJcmV0dXJuIG5ldyBUcmFuc3BvcnRDb25maWdDYWxsYmFjaygpIHsK
+ICAgICAgICAgICAKCQkJQE92ZXJyaWRlCgkJCXB1YmxpYyB2b2lkIGNvbmZpZ3VyZShUcmFuc3Bv
+cnQgdHJhbnNwb3J0KSB7CgkJCQlTc2hUcmFuc3BvcnQgc3NoVHJhbnNwb3J0ID0gKFNzaFRyYW5z
+cG9ydCkgdHJhbnNwb3J0OwogICAgICAgICAgICAgICAgc3NoVHJhbnNwb3J0LnNldFNzaFNlc3Np
+b25GYWN0b3J5KGdldFNTSENvbmZpZyhwYXRoVG9Qcml2YXRlS2V5KSk7CgkJCQkKCQkJfQogICAg
+ICAgIH07Cgl9CgkKCXByaXZhdGUgc3RhdGljIEpzY2hDb25maWdTZXNzaW9uRmFjdG9yeSBnZXRT
+U0hDb25maWcoU3RyaW5nIHBhdGhUb1ByaXZhdGVLZXkpIHsKCQkKCQlyZXR1cm4gbmV3IEpzY2hD
+b25maWdTZXNzaW9uRmFjdG9yeSgpIHsKCQkJCgkJCUBPdmVycmlkZQoJCQlwcm90ZWN0ZWQgdm9p
+ZCBjb25maWd1cmUoSG9zdCBoYywgU2Vzc2lvbiBzZXNzaW9uKSB7CgkJICAgICAgICBzZXNzaW9u
+LnNldENvbmZpZygiU3RyaWN0SG9zdEtleUNoZWNraW5nIiwgInllcyIpOwoJCQkJc3VwZXIuY29u
+ZmlndXJlKGhjLCBzZXNzaW9uKTsKCQkJfQoJCQkKCQkJQE92ZXJyaWRlCgkJCXByb3RlY3RlZCBK
+U2NoIGdldEpTY2goSG9zdCBoYywgRlMgZnMpIHRocm93cyBKU2NoRXhjZXB0aW9uIHsKCQkJCUpT
+Y2ggY2ggPSBzdXBlci5nZXRKU2NoKGhjLCBmcyk7CgkJICAgICAgICBjaC5hZGRJZGVudGl0eShw
+YXRoVG9Qcml2YXRlS2V5KTsKCgkJCQlyZXR1cm4gY2g7CgkJCX0KCQl9OwoJfSovCgkKCXByaXZh
+dGUgc3RhdGljIHZvaWQgZGVsZXRlRGlyKEZpbGUgZmlsZSkgewoJICAgIEZpbGVbXSBjb250ZW50
+cyA9IGZpbGUubGlzdEZpbGVzKCk7CgkgICAgaWYgKGNvbnRlbnRzICE9IG51bGwpIHsKCSAgICAg
+ICAgZm9yIChGaWxlIGYgOiBjb250ZW50cykgewoJICAgICAgICAgICAgaWYgKCEgRmlsZXMuaXNT
+eW1ib2xpY0xpbmsoZi50b1BhdGgoKSkpIHsKCSAgICAgICAgICAgICAgICBkZWxldGVEaXIoZik7
+CgkgICAgICAgICAgICB9CgkgICAgICAgIH0KCSAgICB9CgkgICAgZmlsZS5kZWxldGUoKTsKCX0=
+</value>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
+  </array>
+  <array name="imports" type="value" depth="1">
+    <value>java.io.File</value>
+    <value>java.io.IOException</value>
+    <value>java.nio.file.Files</value>
+    <value>java.nio.file.Path</value>
+    <value>java.util.ArrayList</value>
+    <value>java.util.Collection</value>
+    <value>java.util.Collections</value>
+    <value>java.util.List</value>
+    <value>java.util.Map</value>
+    <value>org.eclipse.jgit.api.CloneCommand</value>
+    <value>org.eclipse.jgit.api.Git</value>
+    <value>org.eclipse.jgit.api.ListTagCommand</value>
+    <value>org.eclipse.jgit.api.TagCommand</value>
+    <value>org.eclipse.jgit.api.TransportConfigCallback</value>
+    <value>org.eclipse.jgit.api.errors.GitAPIException</value>
+    <value>org.eclipse.jgit.api.errors.InvalidRemoteException</value>
+    <value>org.eclipse.jgit.api.errors.JGitInternalException</value>
+    <value>org.eclipse.jgit.api.errors.TransportException</value>
+    <value>org.eclipse.jgit.attributes.AttributesNodeProvider</value>
+    <value>org.eclipse.jgit.errors.UnsupportedCredentialItem</value>
+    <value>org.eclipse.jgit.lib.BaseRepositoryBuilder</value>
+    <value>org.eclipse.jgit.lib.ObjectDatabase</value>
+    <value>org.eclipse.jgit.lib.ObjectId</value>
+    <value>org.eclipse.jgit.lib.Ref</value>
+    <value>org.eclipse.jgit.lib.RefDatabase</value>
+    <value>org.eclipse.jgit.lib.ReflogReader</value>
+    <value>org.eclipse.jgit.lib.Repository</value>
+    <value>org.eclipse.jgit.lib.StoredConfig</value>
+    <value>org.eclipse.jgit.transport.CredentialItem</value>
+    <value>org.eclipse.jgit.transport.CredentialsProvider</value>
+    <value>org.eclipse.jgit.transport.SshSessionFactory</value>
+    <value>org.eclipse.jgit.transport.SshTransport</value>
+    <value>org.eclipse.jgit.transport.Transport</value>
+    <value>org.eclipse.jgit.transport.URIish</value>
+    <value>org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider</value>
+    <value>org.eclipse.jgit.transport.sshd.SshdSessionFactory</value>
+    <value>org.eclipse.jgit.util.FS</value>
+  </array>
+</Values>

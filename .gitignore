@@ -1,0 +1,6 @@
+.DS_Store
+resources/*
+*.xml.bak
+*.jks
+*.bak
+manifest.bak

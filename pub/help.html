@@ -1,0 +1,406 @@
+<html lang="en">
+
+<head>
+	<title>Package Home Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="./assets/@delite/dlt-components/css/delite.min.css">
+	<link rel="stylesheet" href="./assets/@delite/dlt-icons/Font/css/dlt-icons-font.css">
+	<link rel="stylesheet" href="./assets/@delite/dlt-icons/Font/css/dlt-icons-glyphs.css">
+	<script src="./assets/angular.min.js"></script>
+	<link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css">
+	<script src="./assets/jquery.min.js"></script>
+	<script src="./assets/bootstrap/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./assets/swagger/swagger-ui.css">
+	<script src="./assets/swagger/swagger-ui-bundle.js"> </script>
+	<script src="./assets/swagger/swagger-ui-standalone-preset.js"> </script>
+	<script src="./assets/angular-route.js"></script>
+	<script type='text/javascript'>
+		var isAuthenticated = false;
+		var isDownload = false;
+	</script>
+	<script src="appInit.js"></script>
+	<script src="service.js"></script>
+
+	<link rel="stylesheet" href="./assets/style.css">
+	</link>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+<button onclick="backToTop()" id="tothetop" title="Go to top"><i class="dlt-icon-panel-control-up"></i></button>
+  	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+		<a class="navbar-brand text-truncate" href="#" data-toggle="tooltip" data-placement="bottom"
+	   	title="{{package.packageName}}"><b>{{package.packageName}}</b></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="navbar-collapse collapse" id="navbarNav">
+			<ul class="main-nav col-lg nav navbar-nav" style="flex-basis: auto;height: 64px;margin: 0;padding: 0;">
+				<li class="top-nav nav-item navbar-text main-nav-item" id="main-home-li"
+					ng-class="{ 'active': current.activeTab == '#main-home' }">
+						<a href="about.html" class="nav-link" id="main-home-tab" 
+						aria-controls="main-home"
+						style="color:white; width: 100px; text-align: center">About</a>
+				</li>
+				<li class="top-nav nav-item navbar-text main-nav-item active" id="main-help-li"
+					ng-class="{ 'active': current.activeTab == '#main-help' }">
+					<a href="./help.html" class="nav-link" id="main-help-tab"
+			   	 	aria-controls="main-home"
+						style="color:white; width: 100px; text-align: center">Help</a>
+				</li>
+			</ul>
+			<li class="top-nav nav-item navbar-text main-nav-item" id="main-home-li"
+				ng-class="{ 'active': current.activeTab == '#main-home' }">
+				<a href="./index.html" class="nav-link" id="main-home-tab"
+				   aria-controls="main-home"
+				style="color:white; width: 100px; text-align: center">Home</a>
+			</li>
+	  	</div>
+	</nav>
+	
+	<div class="tab-content container-fluid" id="pills-tabContent" style="margin-top: 30px; padding: 40px">
+		<h2>Synopsis</h2>
+		<p>webMethods package manager provides an online central registry for developers to share useful packages with others. This package primarily provides an API to allow third party client tools such as the webMethods wpm cli command to allow developers to find and install packages with a single command line call. The web portal is provided as a convenience to allow registries to be browsed and managed without having to install a local client.
+		</p>
+		<h3>
+			List available packages (in default registry)
+		</h3>
+		<pre>
+$ curl "http://localhost:5555/rad/wx.packages:manager/packages" -H "Accept:application/json"
+ {"packages":[{"name":"JcPublicTools","category":"tools","description":"Bunch ... webMethods ...","registeredDate":"24/01/2022",
+ "searchTags":["\"utility\"","\"general\""]}]}
+		</pre>
+		<h3>Get download information for a package</h3>
+		<pre>
+$ curl "http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackage/v1.1" -H "Accept:application/json"
+	{"sourceUrl":"https://github.com/johnpcarter/MyGreatPackage.git", "trust":"TRUSTED_WITH_ISSUES","reason":"bad_email"}
+		</pre>
+		<p>
+			Full API documentation is available via the package itself <a target="api" href="./about.html#api">http://localhost:5555/WxPackageManager/about.html#api</a>
+		</p>
+		<h2>Using the default registry</h2>
+		<p>A single package manager instance can provide multiple independent package registries for different purposes. A default registry is created at startup, which is a public registry i.e. anyone can browse it remotely without requiring any credentials. You can use it to share packages that have no license or export restrictions, otherwise you can create a private package that requires users to authenticate and have permission to download the package.</p>
+		<h3>Adding a package</h3>
+		<p>The following statement shows the simplest API call in order to register a package with the default registry. Registration requires that you authenticate as an administrator user.</p>
+		<pre>
+$ curl -X "POST" "http://localhost:5555/rad/wx.packages:manager/package" \
+  -H 'Content-Type: application/json' \
+  -u 'user:****' \
+  -d $'{
+    "packageName": "MyGreatPackage",
+    "category": "demo",
+    "description": "how now brown cow",
+    "sourceUrl": "https://github.com/johnpcarter/WxPackageManager.git"
+   }'
+		</pre>
+		<p>
+			Replace the -u credentials with a valid login for the server. Alternatively you can use a JWT token as an authorization header,
+			refer to the section below on how to use an access token.
+		<p>
+			You can also add a package from the package manager home screen if you are logged in as an Administrator. You can connect via the menu in the top right corner and clicking on connect. You will then see the option to 'Add package' below the list of packages.
+		</p>
+		<img style="width: 800px; border: 2px solid lightgray" src="./help/add-package.png">
+		<p style="margin-top: 10px">
+			The git repo can either represent a proper package i.e. the git root is the package root folder, or if the git is used to host more than one package, it is assumed that the package will be in a subfolder with the same name as package e.g.
+		</p>
+		<pre>
+	.git
+	/MyGreatPackage
+	/JcPublicTools
+	etc.
+		</pre>
+		<p>You can specify a directory to the packages root if the packages are not in the git root, albeit the package folder must still have the same name as the declared package. Provide the directory in the 'package folder' attribute in the web form or as 'sourcePath' in the curl request e.g.</p>
+		<pre>
+	.git
+	/somefolder/MyGreatPackage
+	/somefolder/JcPublicTools
+		</pre>	
+		<p>
+			in which case the package folder/sourcePath would be 'somefolder'. Note, that you can add packages based on private git repositories to a public package. However, you will need to include a git personal access token in your settings,refer to section on <a href="#privatepackages">Adding private packages</a> below.
+		</p>
+		<h3>Managing multiple versions of the same package</h3>
+		<p>
+			Developers may wish to offer several different versions of the same package. This requires that the developer uses git to create a tagged commit for the given version. This can be done from the command line using git tools as such
+		</p>
+		<pre>
+ $ git tag v1.0 -m "tag for latest commit"
+ $ git push origin v1.0
+		</pre>
+		<p>
+			These tags then become the basis for deciding what versions to document in the package manager. You can view the available tags for a given package in the package details page from the packager manager portal
+		</p>
+		<img style="width: 200px" src="./help/available-versions.png">
+		<p>
+			or you can use the API to list the available versions 
+		</p>
+		<pre>
+ $ curl "http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackage/git"
+ {	 "watchers":"1",
+	 "stargazers":"1",
+	 "lastUpdated":"04/04/2022 06:39",
+	 "availableTags":["v1.1","v1.0"] }
+		</pre>
+		<p>
+			You can then register the appropriate versions for use with the package manager either via the api
+		</p>
+		<pre>
+ $ curl -X POST -u "Administrator:****" "http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackage/tag/v1.1"
+		</pre>
+		<p>
+			or the package manager package details page
+		</p>
+		<img style="width: 800px; border: 2px solid lightgray" src="./help/add-tag.png">
+		<p>
+			After the accepted versions are shown in the package details via the API.
+		</p>
+		<pre>
+ $ curl http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackage -H 'Accept:application/json'
+ {"packageName":"JcPublicTools", "sourceUrl":"https://github.com/johnpcarter/MyGreatPackage.git", ..., "trustedTags":[{"when":"07/04/2022","by":"John Carter","tag":"v1.1"}]...}
+		</pre>
+		<p>
+			Likewise the accepted tags are highlighted in blue when viewing online
+		</p>
+		<img style="width: 200px" src="help/trusted-tags.png">
+		
+		<h3>Trusting a package</h3>
+		<p>
+			It is important to remember that a package can be updated even after you have accepted that version. 
+			However, the package manager provides a mechanism to be able to trust that the version has not been replaced or changed. 
+			To trust a package we leverage signed commits in git. The package manager retrieves and records the signature of a signed commit 
+			so that it can be used later to compare against the source code for the version when it has been downloaded. 
+			A developer can create a signed commit using the following command git command
+		</p>
+		<pre>
+ $ git commit -S -m ‘latest version to sign’
+		</pre>
+		<p>
+			They will need to ensure that they have configured git with a ssh rsa public/private key in advance. The public key will have to be uploaded to git if you want git to be able to verify any signatures later. More documentation can be be found here <a href="https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits">GitHub Documentation on signing commits</a>. The signed commit will then need to be tagged, which can be done online via the github portal or via api/command e.g.
+		</p>
+		<pre>
+ $ git tag -s v1.1 -m "tag for latest commit"
+ $ git push origin v1.1
+		</pre>
+		<p>
+			From the package manager, click on the package and you will now see the version listed in the available versions. Clicking on the version and selecting the git info tab will show the details of tagged commit including the signature. The Accept button has now been replaced with a Trust button indicating that it is now possible to trust that the code cannot be modified as we have now have the signature.
+		</p>
+		<img style="width: 800px; border: 2px solid lightgray" src="./help/tag.png">
+		<p>
+			After reviewing the code click on the "trust" button and the package manager will flag this 
+			version as trusted. The signature is also recorded by the package manager and returned as part of the download information for the given package and version. This allow clients to verify that the downloaded version matches and hasn't been replaced since you reviewed the code. You can also choose to trust the package via the API, however you will need to extract the signature associated with the git commit yourself so that it can be included in the api call e.g.
+		</p>
+		<pre>
+ $ curl -X "POST" "http://localhost:5555/rad/wx/packages/manager/package/MyGreatPackage/tag/v1.0.0" \
+	-u 'Administrator:****' \
+	-H 'Content-Type: 'application./json" \
+	-d $'{
+		"signature": "..........."
+	}'
+		</pre>
+		<h3>Listing available versions</h3>
+		<p>
+			Available versions can be listed for each package via the following API call
+		</p>
+		<pre>
+ $ curl "http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackage" -H "Accept:application/json"
+	{"packageName":"MyGreatPackage","registryName":"default", ... ,"registeredDate":"07/04/2022",
+	"trustedTags":[{"when":"08/04/2022","tag":"v1.0"},{"when":"07/04/2022","by":"John Carter","tag":"v1.1"}],
+	 ... , "totalDownloads":"32","recentDownloads":"21","alertEmail":null}
+		</pre>
+		<p>
+			To get the required download information use the following API
+		</p>
+		<pre>
+ $ curl "http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackge/1.1" -H "Accept:application/json"
+ 	{"sourceUrl":"https://github.com/johnpcarter/JcPublicTools.git", "trust":"ACCEPTED"}
+		</pre>
+		<p>
+			The trust value indicates whether the package version has been recognised by the package manager. ACCEPTED indicates that the package is known, but we cannot guarantee the sanctity of the code. TRUSTED would indicate that we have a signature and the current tagged version matches and hence the code has not been changed since the package was verified.
+		</p>
+		<h3>Downloading the package via the Package Manager</h3>
+		<p>
+			The package manager also provides a download option to avoid having to install git locally. This option is not generally recommended as it adds a lot of overhead to the package manager. Ideally each client will download the package independently based on the attributes returned by the above API calls.
+		</p>
+		<pre>
+ $ curl "http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackage/v1.1/download" -H "Accept:application/json" --output MyGreatPackage.zip
+		</pre>
+		<p>
+			Don't forget to specify the --output option to ensure the package is written to a file, the file format is a zip and it will require unzipping before moving into the packages directory.
+		</p>
+		<h3>Creating a private registry</h3>
+		<p>The implicit default package registry is a public registry and hence does not require clients to authenticate in order to list and retrieve package details. However, it cannot cannot be used if you want to enforce access control to limit packages to only certain users. In which case you need to create a new private registry e.g.</p>
+		<pre>
+ $ curl -X "POST" "http://localhost:5555/rad/wx.packages:manager/registry" \
+	-H 'Content-Type: application/json' \
+	-u 'Administrator:****' \
+	-d $'{
+		"name": "private-registry",
+		"type": "private",
+		"description": "this registry requires that users are connected!",
+		"trustLevel": 0,
+		"default": false
+	 }'
+		</pre>
+		<p>
+			or the WxPackageManager home page if you have admin rights. Click on the config menu (cog) in the top right hand corner of the page and select registries. Then select "Add registry", if the option is not shown, then you will need to ensure that you are connected as an Administrator level user. You can do this via the connection option in the same menu.
+		</p>
+		<img style="width: 900px; border: 2px solid lightgray" src="./help/add-registry.png">
+		<p>
+			The trust level is a value between 0 and 3, where 0 signifies no trust at all to 3 where packages are guaranteed to be verified and signed against malicious use. Set default to true if you wish to make this registry the default registry i.e. the registry to use if the registry has not been explicitly set when using the packages API.
+		</p>
+		<p class="note">
+			NOTE: Remember that this registry will only be listed or accessible by users that are authenticated. Equally packages that are added to this registry must indicate who is allowed access. You can create as many registries as you want, both public and private and also change the default registry to any other registry as well. 
+		</p>
+		<h3 id="privatepackages">Adding a package to a private registry</h3>
+		<p>
+			Adding a package to a private registry will allow anybody with access to the registry to download it; 
+			There are three pre-requisites if you want to ensure that only specific users can access the package; <br>
+			a) first ensure that the git repository is private (otherwise restrictions in wpm make no sense)<br>
+			b) Check the box "source requires authentication to indicate that it is a private repository"<br>
+			c) Select the initial permissions from the permissions select list, either everybody or "specific users only" 
+		</p>
+		<img style="width: 800px; border: 2px solid lightgray" src="./help/add-package-security.png">
+		<p style="margin-top: 10px">
+			If you chose "specific users only" then you will have to add the users to the package once the package has been created.
+			From the package details screen click on the "add user" button under the access section.		
+		</p>
+		<img style="width: 800px; margin-top: 10px" src="./help/package-details-add-user.png">
+		<p>
+			There is a dedicated API resource to allow the users associated with a package to be updated
+		</p>
+		<pre>
+ curl -X "POST" "http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackage/users?registry=private-registry" \
+  -H 'Content-Type: 'application/json' \
+  -u 'Administrator:****' \
+  -d $'{
+     users: ['Administrator', 'bob']
+    }'
+		</pre>
+		<p>
+			Only users in the indicated list will be allowed to see the package. 'everybody' is a special use case indicating that any authenticated user can access the package.
+			everybody is automatically assigned if you have not set any specific users. It is removed automatically when you first add a new user.
+		</p>
+		<h3>Access to private GIT repositories</h3>
+		<p>
+			The package manager allows developers to download packages from private git repositories without requiring that they are known by the git server. It does this by setting a deploy key for the repository and then sharing it with the developer.
+		</p>
+		<img style="width: 800px" src="./help/git-deploy-key.png">
+		<p style="margin-top: 10px">
+			The advantage being that the individual token can be reset or revoked without effecting other users. However, you need to first ensure that the package manager has proper git developer credentials so that it can call the relevant git APIs. Generate a developer access token from your git account settings e.g.
+		</p>
+		<img style="width: 800px" src="./help/git-personal-access-tokens.png">
+		<p style="margin-top: 10px">
+			Then copy the token and paste it into the credentials sections of the settings page. Click on the config menu in the top right hand corner of the screen and click settings. You can then set the default source '*' by click on the edit button of the first line and enter your git id and the copied token.
+			If you have more than git server to manage then add a row for each git server making sure that the source matches the beginning of the associated git repositories.
+			If a git url does not match, then the default credentials (source is *) are used.
+		</p>
+		<img style="width: 900px" src="./help/settings-git.png">
+		<p style="margin-top: 10px">
+			NOTE: These credentials will only be used by your own account are encrypted and not shared with any users or third-party clients. They are used by the package manager only at your behest to browse private git repositories and allow deploy tokens to be added and removed so that access can be given to other users via the package manager.
+			The Administrator account is a special case as it used to manage deploy keys and access private repositories regardless of the connected user, but importantly they are not exposed to the user.
+		</p>
+		<p>
+			The package manager can now dynamically add and remove ssh deployments keys for each user that you want to give access to in a private package. However, you need to flag that the package is linked to a private git repository when creating the package by checking the option "source requires authentication". 
+		</p>
+		<p>
+			In which case a ssh rsa public/private key pair will be generated for each user when assigning them to the package. The public key is then uploaded to the git repository as a deploy key and the private key is stored locally and shared with the developer when requesting the download information for the git package.
+		</p>
+		<h3>Refreshing deploy keys for individual users</h3>
+		<p>
+			If a user gets an access denied when trying to download a package it is probably due to the deploy key being expired or deleted. You can regenerate the key by selecting "regenerate key" from the user context menu. You can use the same menu to remove the user too.
+		</p>
+		<img style="width: 600px" src="./help/sync-deploy-key.png">
+		<p>Likewise the api call would be</p>
+		<pre>
+ $ curl -X "POST" "http://localhost:5555/rad/wx.packages:manager/package/MyGreatPackage/user/bob" \
+	-u 'Administrator:****' 
+		</pre>
+		<p>Any error probably indicates that the token has already been synced. In which case your best bet is to remove and the add the user again.
+		</p>
+		<h3>Notifications</h3>
+		<p>Users can choose to be notified by email when packages are added to a registry or when new versions of a package is added. You will first need to ensure that you have configured the SMTP server via the following global variables</p>
+		<ul>
+			<li><b>com.wx.packagemanager.notification.smtp.host</b></li>
+			<li><b>com.wx.packagemanager.notification.smtp.port</b></li>
+			<li><b>com.wx.packagemanager.notification.smtp.user</b> Optional</li>
+			<li><b>com.wx.packagemanager.notification.smtp.password</b> Optional</li>
+			<li><b>com.wx.packagemanager.notification.smtp.from</b> Optional</li>
+		</ul>
+		<p>
+			They can also be set via configuration variables if starting as a container e.g.
+		</p>
+		<ul>
+			<li>-e globalvariable.com.wx.packagemanager.notification.smtp.host={smtp_host}</li>
+		</ul>
+		<p>
+			Users can choose to be informed when new versions of a package become available from the package details page
+		</p>
+		<img style="width: 200px; border: 1px solid lightgray" src="./help/notify-me.png">
+		<p style="top-margin: 10px">
+			However, the user will also have to add their email address via the settings page. Where they can also choose to add and remove existing notifications. A user can also choose to subscribe to notifications for a registry so that they are informed whenever a package is added to the registry.
+		</p>
+		<img style="width: 800px" src="./help/add-notification.png">
+		<pre style="top-margin: 10px">
+ $curl -X "POST" "http://localhost:5555/rad/wx.packages:manager/notifications" \
+ 	-u 'bob:****' \
+	-d $'{
+	  "name": "MyGreatPackage",
+	  "isPackage": true,
+	  "friendlyName": "bob",
+	  "email": "xxx@xxx.com"
+	}'
+		</pre>
+		<p>
+			The notification template can be customised via a global variable
+		</p>
+		<ul>
+			<li><b>com.wx.packagemanager.notification.template</b></li>
+			<li>or -e com.wx.packagemanager.notification.template={template}</li>
+		</ul>
+		<p>The template should be formatted as dsp and can include the following variables</p>
+		<pre>
+Hi %value toName%,
+A new version of the package '%value packageName%' %ifvar defaultRegistry vequals(registryDetails/name)% 
+%else%in the registry '%value registryDetails/name%' %endif%is now available, 
+details can be viewed online with this link.
+		
+%ifvar packageManagerHostUrl -notempty%
+  %value packageManagerHostUrl%?registry=%value registryDetails/name%&package=%value packageName%
+%endif%
+				
+You are receiving this email, because you registered with the webMethods package registry
+%ifvar packageManagerHostUrl -notempty%, you can unsubscribe or change your notifications with the following link
+		
+%value packageManagerHostUrl%/settings
+%else%.%endif%
+		
+regards,
+webMethods package registrar
+		</pre>
+		<h3>Using authorization tokens</h3>
+		<p>So far we have used basic authentication for all APIs that require secure access. However, this is problematic if you want to leverage these APIs from your own scripts CI/CD orchestration as it risks exposing your user and password.
+			Instead you can choose to create a JWT Authorization token that you can use instead of credentials. The advantage is that the token can easily be revoked if compromised.
+			A token can be generated via the API
+			<pre>
+curl "http://localhost:5555/rad/wx.packages:manager/access/token/label?numDays=10" \
+-H 'Accept: application/json' \
+-u 'user:*****'
+{"accessToken":"eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJBZG1pbmlzdHJhdG9yIiwiYXVkIjoicGFja2FnZS1tYW5hZ2VyIiwiaXNzIjoiU29mdHdhcmVBRyIsIm51bURheXMiOiItIiwiaWQiOiJBZG1pbmlzdHJhdG9yIiwibGFiZWwiOiJib3RoZXIifQ.b0LwjcKNlpNJ5AvAChE35s1PcxiXTC1iGXdrDKxTc0H4tg-1FcQ2VMr8nPnvCBn3dDBftfsI5t2w5sKKfwOH9W1Rh0KkaVjbuvA8vWdBFMlPTMCXe87vIYujJQLF-FENZt2PGxx2-vnfB1OivRYsbsw2TTqX1f26_xUtgGu1FF9p_UP2LWptm-tU4Pz7gazEP-ZSoGrTtBz5fd77TnWfHgCQ7jz3AryCV91CyQW0IilKRN5hS46XR-n2MZobAna4O8BtEap1WXQHZO-3HxtC1WPNC0ePD7GBCem3fu9D-t7SlE7ZjGNLg_mrq4DLM52hkDp-t_sc9szcUkcpX4m29g"}		
+			</pre>
+			<p>
+				Obviously you will need to provide your credentials for this initial request, but any further requests can instead use the token. The label is used to identify the token from the setting page and must be unique. numDays is an optional attribute that you can use to limit the validity of the resulting token.
+				The token itself is however never stored and so the developer must copy the returned token immediately as there is no way to recover it afterwards.
+				The developer should then leverage the token via the Authorization header e.g.
+			</p>
+			<pre>
+curl "http://localhost:5555/rad/wx.packages:manager/packages?registry=softwareag" \
+	-H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJBZG1pbmlzdHJhdG9yIiwiYXVkIjoicGFja2FnZS1tYW5hZ2VyIiwiaXNzIjoiU29mdHdhcmVBRyIsIm51bURheXMiOiItIiwiaWQiOiJBZG1pbmlzdHJhdG9yIiwibGFiZWwiOiJsYWJlbCJ9.cKFbWIRU0ptBYZXFeotV-3f_FPHfLo7-ErKDYsebB01nwOllEOIF4W9IQuAfkCYmNPwDsNR2Vbyd7vIEg8a7WHUJ-XD3LjLvDORQrnmhIwNsaGklyW4dcXlu5Fl3BwI6idDZkBww-W9g31l0dTCJODpMcabRuciqDawz1Vv7vxWSC463-MztgrPy7YBvqkzR8O_SL-7s2Q9Lc_lcHSyhJPzc1J_YVd4O93yBzC5d-hg2Frjt5D6tY21o61Ii6eG5fSD0_FgPFrkOUcDvwXOn15axGiUhDyheuNqxZuN35DUA-WRVukAl_bti7IRc356tbCWOEmEd3YNJaJOQh5J6hg'
+			</pre>
+			<p>
+				You can alternately create and more importantly revoke tokens via the settings page.
+			</p>
+			<img style="width: 800px; border: 1px solid lightgray" src="./help/access-tokens.png">
+	</div>
+</body>
+</html>

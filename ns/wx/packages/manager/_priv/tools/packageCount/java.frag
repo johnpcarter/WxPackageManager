@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="name">packageCount</value>
+  <value name="encodeutf8">true</value>
+  <value name="body">Ly8gcGlwZWxpbmUgaW4KCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0
+Q3Vyc29yKCk7ClN0cmluZyByZWdpc3RyeSA9IElEYXRhVXRpbC5nZXRTdHJpbmcocGlwZWxpbmVD
+dXJzb3IsICJyZWdpc3RyeSIpOwpTdHJpbmcgcGFja2FnZU5hbWUgPSBJRGF0YVV0aWwuZ2V0U3Ry
+aW5nKHBpcGVsaW5lQ3Vyc29yLCAicGFja2FnZU5hbWUiKTsKCi8vIHByb2Nlc3MKClN0cmluZyBr
+ZXkgPSAocmVnaXN0cnkgIT0gbnVsbCA/IHJlZ2lzdHJ5IDogImRlZmF1bHQiKSArICItIiArIHBh
+Y2thZ2VOYW1lOwppbnQgY291bnQgPSAwOwoKaWYgKF9wYWNrYWdlQ291bnRlci5nZXQoa2V5KSAh
+PSBudWxsKSB7Cgljb3VudCA9IF9wYWNrYWdlQ291bnRlci5nZXQoa2V5KTsKfQogCi8vIHBpcGVs
+aW5lIG91dAoKSURhdGFVdGlsLnB1dChwaXBlbGluZUN1cnNvciwgImNvdW50IiwgIiIgKyBjb3Vu
+dCk7CnBpcGVsaW5lQ3Vyc29yLmRlc3Ryb3koKTsKCgk=</value>
+</Values>
