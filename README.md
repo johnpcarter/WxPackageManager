@@ -38,7 +38,7 @@ package JcPublicTools
 e.g.
  
 ```
- $ cd ${SAG_HOME}/IntegrationServer/instances/default/packages
+ $ cd ${WM_HOME}/IntegrationServer/instances/default/packages
  $ git clone https://github.com/johnpcarter/JcPublicTools.git
  $ git clone https://github.com/johnpcarter/WxPackageManager.git
 ```
@@ -54,27 +54,27 @@ You will need to create your own key and trust store beforehand as for security 
 
 Create a private/public key pair
 ```
-$ keytool -genkey -alias packages.softwareag.com -keyalg RSA -keystore wm-packages-manager-keystore.jks -keysize 1024
+$ keytool -genkey -alias packages.webmethods.io -keyalg RSA -keystore wm-packages-manager-keystore.jks -keysize 1024
 ```
 
 Create a certificate request
 ```
-$ keytool -certreq -alias packages.softwareag.com -file packages.softwareag.csr -keystore wm-packages-manager-keystore.jks -storepass mypwd
+$ keytool -certreq -alias packages.webmethods.io -file packages.webmethods.csr -keystore wm-packages-manager-keystore.jks -storepass mypwd
 ```
 
 Send the output from the following command to your certificate authority
 ```
-$ keytool -printcertreq -file packages.softwareag.csr
+$ keytool -printcertreq -file packages.webmethods.csr
 ```
 
 Now import the certificate into your key store
 ```
-$ keytool -import -trustcacerts -keystore wm-packages-manager-keystore.jks -storepass mypwd -alias packages.softwareag.com -file wm-packages.com.cer
+$ keytool -import -trustcacerts -keystore wm-packages-manager-keystore.jks -storepass mypwd -alias packages.webmethods.io -file wm-packages.com.cer
 ```
 
 The trust store should reference the CA that signed your private key e.g.
 ```
-$ keytool -import -alias packages.softwareag.com -keystore wm-packages-manager-truststore.jks -file go-daddy-ca-root.crt -deststoretype jks
+$ keytool -import -alias packages.webmethods.io -keystore wm-packages-manager-truststore.jks -file go-daddy-ca-root.crt -deststoretype jks
 ```
 
 ### Import the files into your IS/MSR.
@@ -88,7 +88,7 @@ Alternatively, you can configure an MSR using configuration variables e.f.
 ```
 keystore.wm_packages_manager.ksLocation=./packages/WxPackageManager/config/wm-packages-manager-keystore.jks
 keystore.wm_packages_manager.ksPassword=*****
-keystore.wm_packages_manager.keyAlias.packages.softwareag.com.keyAliasPassword=*****
+keystore.wm_packages_manager.keyAlias.packages.webmethods.io.keyAliasPassword=*****
 truststore.wm_packages_manager.ksLocation=./packages/WxPackageManager/config/wm-packages-manager-truststore.jks
 truststore.wm_packages_manager.ksPassword=*****
 ```
@@ -103,11 +103,11 @@ compromised if you have never replaced the defaults provided by Software AG.
 
 To allow JWT token authentication, configure your JWT settings via Security -> JWT in the IS/MSR admin portal
 
-Click on 'Trusted issuers' and then 'Add Issuer', specify the value 'SoftwareAG'
+Click on 'Trusted issuers' and then 'Add Issuer', specify the value 'wM'
 Then click on 'Return to JWT', followed by 'Issuer Configuration'. On this page click 'Add Issuer Certificate Mapping'.
 
-Choose the issuer 'SoftwareAG' and then either the trust store alias 'wm_packages_manager' or 'DEFAULT_IS_TRUSTSTORE'
-depennding on the configuration you chose in the previous section. The certificate alias will be whatever is presented
+Choose the issuer 'wM' and then either the trust store alias 'wm_packages_manager' or 'DEFAULT_IS_TRUSTSTORE'
+depending on the configuration you chose in the previous section. The certificate alias will be whatever is presented
 in the drop down.
 
 # Database setup
