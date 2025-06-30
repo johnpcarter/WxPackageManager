@@ -5,6 +5,7 @@
   <value name="system_package">no</value>
   <value name="version">1.3.1</value>
   <value name="build">880</value>
+  <value name="source_server_version">10.15</value>
   <record name="startup_services" javaclass="com.wm.util.Values">
     <null name="wx.packages.manager._priv:startup"/>
   </record>
@@ -13,6 +14,7 @@
   </record>
   <null name="replication_services"/>
   <record name="requires" javaclass="com.wm.util.Values">
+    <value name="WmJDBCAdapter">10.3+</value>
   </record>
   <value name="listACL">Default</value>
   <value name="webappLoad">yes</value>
