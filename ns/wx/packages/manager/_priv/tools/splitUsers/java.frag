@@ -2,6 +2,15 @@
 
 <Values version="2.0">
   <value name="name">splitUsers</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] record:1:required currentUsers</value>
+    <value>[i] - field:0:required USER</value>
+    <value>[i] field:1:required newUsers</value>
+    <value>[o] field:1:required usersToAdd</value>
+    <value>[o] field:1:required usersToRemove</value>
+  </array>
+  <value name="subtype">unknown</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUgaW4KCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0
 Q3Vyc29yKCk7CklEYXRhW10JY3VycmVudFVzZXJzID0gSURhdGFVdGlsLmdldElEYXRhQXJyYXko
@@ -24,5 +33,5 @@ Cn0KCi8vIHBpcGVsaW5lIG91dAoKSURhdGFVdGlsLnB1dChwaXBlbGluZUN1cnNvciwgInVzZXJz
 VG9BZGQiLCB1c2Vyc1RvQWRkLnRvQXJyYXkobmV3IFN0cmluZ1t1c2Vyc1RvQWRkLnNpemUoKV0p
 KTsKSURhdGFVdGlsLnB1dChwaXBlbGluZUN1cnNvciwgInVzZXJzVG9SZW1vdmUiLCB1c2Vyc1Rv
 UmVtb3ZlLnRvQXJyYXkobmV3IFN0cmluZ1t1c2Vyc1RvUmVtb3ZlLnNpemUoKV0pKTsKcGlwZWxp
-bmVDdXJzb3IuZGVzdHJveSgpOwoKCQ==</value>
+bmVDdXJzb3IuZGVzdHJveSgpOwoKCQo=</value>
 </Values>

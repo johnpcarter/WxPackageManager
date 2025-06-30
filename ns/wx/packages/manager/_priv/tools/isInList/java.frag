@@ -2,6 +2,14 @@
 
 <Values version="2.0">
   <value name="name">isInList</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] record:1:required trustedTags</value>
+    <value>[i] - field:0:required tag</value>
+    <value>[i] field:0:required tag</value>
+    <value>[o] object:0:required exists</value>
+  </array>
+  <value name="subtype">unknown</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUgaW4KCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0
 Q3Vyc29yKCk7ClN0cmluZyB0YWcgPSBJRGF0YVV0aWwuZ2V0U3RyaW5nKHBpcGVsaW5lQ3Vyc29y
@@ -15,5 +23,5 @@ YWdzQ3Vyc29yLCAidGFnIik7CgkJCXRydXN0ZWRUYWdzQ3Vyc29yLmRlc3Ryb3koKTsKCQkKCQkJ
 aWYgKHQgIT0gbnVsbCAmJiB0YWcuZXF1YWxzKHQpKSB7CgkJCQlmb3VuZCA9IHRydWU7CgkJCQli
 cmVhazsKCQkJfQoJCX0KCX0KfQoKLy8gcGlwZWxpbmUgb3V0CgpJRGF0YVV0aWwucHV0KHBpcGVs
 aW5lQ3Vyc29yLCAiZXhpc3RzIiwgZm91bmQpOwpwaXBlbGluZUN1cnNvci5kZXN0cm95KCk7CgoJ
-</value>
+Cg==</value>
 </Values>

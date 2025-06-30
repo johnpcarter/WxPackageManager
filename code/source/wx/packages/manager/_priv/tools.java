@@ -7,9 +7,14 @@ import com.wm.util.Values;
 import com.wm.app.b2b.server.Service;
 import com.wm.app.b2b.server.ServiceException;
 // --- <<IS-START-IMPORTS>> ---
+import com.wm.app.b2b.server.InvokeState;
 import com.wm.app.b2b.server.ServiceThread;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,11 +26,13 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
 import com.softwareag.is.dynamicvariables.DynamicVariablesEncryptor;
 import com.softwareag.util.IDataMap;
+import com.wm.util.JournalLogger;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class tools
@@ -48,6 +55,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(addToArray)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] record:0:required value
 		// [i] - field:0:required @name
@@ -122,10 +130,31 @@ public final class tools
 
 
 
+	public static final void base64Decode (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(base64Decode)>> ---
+		// @subtype unknown
+		// @sigtype java 3.5
+		// [i] field:0:required encodedData
+		// [o] field:0:required decodedData
+		IDataCursor cur = pipeline.getCursor();
+		String input = IDataUtil.getString(cur, "encodedData");
+		String decodedData = new String(Base64.getDecoder().decode(input)).replaceAll("\n", "");
+		System.out.println("decoded: " + "'" + decodedData + "'");
+		cur.insertAfter("decodedData", decodedData);
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void countPackage (IData pipeline)
         throws ServiceException
 	{
 		// --- <<IS-START(countPackage)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required registry
 		// [i] field:0:required packageName
@@ -168,6 +197,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(decrypt)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required encryptedText
 		// [o] field:0:required text
@@ -199,12 +229,33 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(defaultRegistry)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [o] field:0:required registry
-		
 		IDataCursor c = pipeline.getCursor();
 		IDataUtil.put(c, "registry", _defaultRegistry);
 		c.destroy();
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
+	public static final void getEnvironmentVar (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getEnvironmentVar)>> ---
+		// @subtype unknown
+		// @sigtype java 3.5
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		String envVarName = IDataUtil.getString(pipelineCursor, "envVarName" );
+		pipelineCursor.destroy();
+		String envVarValue = System.getenv(envVarName);
+		
+		IDataUtil.put(pipelineCursor, "envVarValue", envVarValue);
+		pipelineCursor.destroy();
+		
 			
 		// --- <<IS-END>> ---
 
@@ -217,6 +268,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(getTaskId)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [o] field:0:required taskId
 		IDataCursor c = pipeline.getCursor();
@@ -230,10 +282,30 @@ public final class tools
 
 
 
+	public static final void getTenantIdFromSession (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(getTenantIdFromSession)>> ---
+		// @subtype unknown
+		// @sigtype java 3.5
+		// [o] field:0:required tenantId
+		String tenantID = InvokeState.getCurrentState().getTenantID();
+		IDataCursor pipelineCursor = pipeline.getCursor();
+		IDataUtil.put(pipelineCursor, "tenantId", tenantID);
+		IDataUtil.put(pipelineCursor, "currState", InvokeState.getCurrentState().toString());
+		pipelineCursor.destroy();
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void hackForExtractClaims (IData pipeline)
         throws ServiceException
 	{
 		// --- <<IS-START(hackForExtractClaims)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] object:0:required claimsDetails
 		// [i] field:0:required ref
@@ -281,6 +353,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(invokeAsync)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required service
 		// [i] record:0:required pipeline
@@ -318,6 +391,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(isInList)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] record:1:required trustedTags
 		// [i] - field:0:required tag
@@ -363,69 +437,42 @@ public final class tools
 
 
 
-	public static final void movePackagesToTop (IData pipeline)
+	public static final void logException (IData pipeline)
         throws ServiceException
 	{
-		// --- <<IS-START(movePackagesToTop)>> ---
+		// --- <<IS-START(logException)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
-		// [i] field:1:required packages
-		// [i] field:0:required dir
-		IDataCursor c = pipeline.getCursor();
-		String packages[] = IDataUtil.getStringArray(c, "packages");
-		String dir = IDataUtil.getString(c, "dir");
-		c.destroy();
-		
-		// process
-		
-		String repDir = new File(new File(dir).getParent(), new File(dir).getName() + "_copy").getAbsolutePath();
-		
-		if (packages.length > 1) {
-			try {
-				Files.createDirectory(Path.of(repDir));
-			} catch (IOException e) {
-				throw new ServiceException(e);
-			}
+		// [i] object:0:required exception
+		// [i] object:1:required stacktrace
+		IDataCursor cur = null;
+		try {
+		cur = pipeline.getCursor();
+		Object e = IDataUtil.get(cur, "exception");
+		if (!(e instanceof Throwable)) {
+		return;
+		}
+		Exception exception = (Exception) e;
+		Object stackTraceElements = IDataUtil.get(cur, "stacktrace");
+		StackTraceElement[] stackTraceElementsArray = null;
+		if (stackTraceElements.getClass().isArray()
+		&& StackTraceElement.class.equals(stackTraceElements.getClass().getComponentType())) {
+		stackTraceElementsArray = (StackTraceElement[]) stackTraceElements;
 		}
 		
-		for (String p: packages) {
-			
-			String filePath = findPath(dir,  p);
-			
-			if (filePath != null) {
-				if (packages.length == 1) {
-					// make package rootdir
-					
-					try {
-						Files.move(Path.of(filePath), Path.of(repDir), StandardCopyOption.REPLACE_EXISTING);
-					} catch (IOException e) {
-						throw new ServiceException(e);
-					}
-					
-				} else if (!new File(filePath).getParent().equals(dir)) {
-					// more than one package so move it to directly under dir_copy
-					
-					try {
-						Files.move(Path.of(filePath), Path.of(repDir, p), StandardCopyOption.REPLACE_EXISTING);
-					} catch (IOException e) {
-						throw new ServiceException(e);
-					}
-				}
-			}
-		}
+		try (StringWriter sw = new StringWriter(); PrintWriter pw = new PrintWriter(sw)) {
+		exception.printStackTrace(pw);
+		JournalLogger.logError(JournalLogger.LOG_EXCEPTION, JournalLogger.ERROR,
+			String.format("Exception [%s] occurred, message: [%s], %s", exception.getClass().toString(),
+					exception.getMessage(), sw.toString()));
 		
-		if (new File(repDir).exists()) {
-			try {
-				System.out.println("deleting original dir " + dir);
-				
-				deleteFiles(new File(dir));
-				Files.delete(Path.of(dir));
-				
-				System.out.println("renaming " + repDir + " to " + dir);
-				
-				Files.move(Path.of(repDir), Path.of(dir), StandardCopyOption.REPLACE_EXISTING);
-			} catch (IOException e) {
-				throw new ServiceException(e);
-			}	
+		} catch (IOException ioe) {
+		throw new ServiceException("Unable to log exception");
+		}
+		} finally {
+		if (cur != null) {
+		cur.destroy();
+		}
 		}
 		// --- <<IS-END>> ---
 
@@ -438,6 +485,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(packageCount)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required registry
 		// [i] field:0:required packageName
@@ -450,19 +498,17 @@ public final class tools
 		
 		// process
 		
-		String key = (registry != null ? registry : "default") + "-" + packageName;
+		String key = (registry != null ? registry : "public") + "-" + packageName;
 		int count = 0;
 		
 		if (_packageCounter.get(key) != null) {
-			count = _packageCounter.get(key);
+		count = _packageCounter.get(key);
 		}
 		 
 		// pipeline out
 		
 		IDataUtil.put(pipelineCursor, "count", "" + count);
 		pipelineCursor.destroy();
-		
-			
 		// --- <<IS-END>> ---
 
                 
@@ -474,6 +520,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(packageCounts)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [o] record:1:required counts
 		// [o] - field:0:required registry
@@ -513,6 +560,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(padDaysInDownloadHistory)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] record:1:required results
 		// [i] - object:0:required TRACK_DATE
@@ -596,6 +644,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(recordTaskId)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required taskId
 		IDataCursor c = pipeline.getCursor();
@@ -609,10 +658,41 @@ public final class tools
 
 
 
+	public static final void retrieveOidcClaimsFromSession (IData pipeline)
+        throws ServiceException
+	{
+		// --- <<IS-START(retrieveOidcClaimsFromSession)>> ---
+		// @subtype unknown
+		// @sigtype java 3.5
+		// [o] record:0:required idToken
+		// [o] record:0:required uiToken
+		IData idToken = InvokeState.getCurrentIdTokenClaims();
+		IData uiToken = InvokeState.getCurrentUserInfoTokenClaims();
+		String ibmEmail = null;
+		String ibmUniqueSecurityName = null;
+		if(idToken != null) {
+		IDataCursor idTokenCursor = idToken.getCursor();
+		ibmEmail = IDataUtil.getString(idTokenCursor, "email");
+		ibmUniqueSecurityName = IDataUtil.getString(idTokenCursor, "uniqueSecurityName");
+		}
+		
+		IDataCursor cur = pipeline.getCursor();
+		cur.insertAfter("idToken", idToken);
+		cur.insertAfter("uiToken", uiToken);
+		cur.insertAfter("ibmEmail", ibmEmail);
+		cur.insertAfter("ibmUniqueSecurityName", ibmUniqueSecurityName);
+		// --- <<IS-END>> ---
+
+                
+	}
+
+
+
 	public static final void setDefaultRegistry (IData pipeline)
         throws ServiceException
 	{
 		// --- <<IS-START(setDefaultRegistry)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required registry
 		IDataCursor c = pipeline.getCursor();
@@ -634,6 +714,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(splitUrl)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required url
 		// [o] field:0:required owner
@@ -651,9 +732,33 @@ public final class tools
 		
 		if (url != null) {
 		
-			String[] parts = splitUri(url);
-			owner = parts[0];
-			repo = parts[1];
+		String[] parts = splitUri(url);
+		owner = parts[0];
+		repo = parts[1];
+		
+		try {
+		URL urlParsed = new URL(url);
+		String githubApiHost = "api.github.com";
+		String repoHost = urlParsed.getHost();
+		if (!(repoHost.contains("github.com"))) {
+		githubApiHost = String.format("%s/api/v3", repoHost);
+		}
+		
+		JournalLogger.log(4,90,3,"[WPM]", "Selected Github REST API host: " + githubApiHost);
+		
+		// pipeline out
+		IDataUtil.put(pipelineCursor, "githubApiHost", githubApiHost);
+		IDataUtil.put(pipelineCursor, "repoHost", repoHost);
+		} catch (MalformedURLException e) {
+		IData input = IDataFactory.create();
+		IDataCursor inputCursor = input.getCursor();
+		IDataUtil.put(inputCursor, "exception", e);
+		IDataUtil.put(inputCursor, "stacktrace", e.getStackTrace());
+		inputCursor.destroy();
+		logException(input);
+		
+		throw new ServiceException("Unable to construct GitHub API URL.");
+		}
 		}
 		
 		// pipeline out
@@ -661,8 +766,6 @@ public final class tools
 		IDataUtil.put(pipelineCursor, "owner", owner);
 		IDataUtil.put(pipelineCursor, "repo", repo);
 		pipelineCursor.destroy();
-		
-			
 		// --- <<IS-END>> ---
 
                 
@@ -674,6 +777,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(splitUsers)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] record:1:required currentUsers
 		// [i] - field:0:required USER
@@ -746,6 +850,7 @@ public final class tools
         throws ServiceException
 	{
 		// --- <<IS-START(truncateStringToNewLine)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required inString
 		// [o] field:0:required outString
@@ -776,7 +881,7 @@ public final class tools
 	
 	private static String _taskId = null;
 	
-	private static String _defaultRegistry = "default";
+	private static String _defaultRegistry = "public";
 	
 	private static HashMap<String, Integer> _packageCounter = new HashMap<String, Integer>();
 	
@@ -813,16 +918,32 @@ public final class tools
 		return FOMATTER.format(convertDateToLocalDate(date));
 	}
 	
-	public static String[] splitUri(String url) {
+	public static String[] splitUri(String urlString) {
 	
-		// https://github.com/SoftwareAG/wm-is-client.git
-		
-		String repo = url.substring(url.lastIndexOf("/")+1, url.length() - 4);
-		String owner = url.substring(0, url.length() - (repo.length() + 5));
+		// https://github.com/SoftwareAG/wm-is-client.git		
+	    URL url;
+		try {
+			url = new URL(urlString);
+		} catch (MalformedURLException e) {
+	    	throw new RuntimeException(String.format("%s is not a valid URL.",urlString));
+		}	
+	    
+	    String path = url.getPath(); 
+	    
+	    String[] split = path.replaceFirst("/", "").split("/");
+	    String malformedGithubUrlMessage = String.format("\"%s\" is not a valid GitHub repository URL. A valid GitHub URL is in the format https://<hostname>/<owner>/<repository>.git", url);
+	    if (split.length != 2) {
+	    	throw new RuntimeException(malformedGithubUrlMessage);
+	    }
+	    
+	    if (!(split[1].endsWith(".git"))) {
+	    	throw new RuntimeException(malformedGithubUrlMessage);
+	    }
+	    
+		String repo = split[1].replace(".git", "");
+		String owner = split[0];
 					
-		if (owner.indexOf("/") != -1) {
-			owner = owner.substring(owner.lastIndexOf("/")+1);
-		} else if (owner.indexOf(":") != -1) {
+		if (owner.indexOf(":") != -1) {
 			owner = owner.substring(owner.indexOf(":")+1);
 		}
 		
@@ -874,6 +995,16 @@ public final class tools
 	         file.delete();
 	      }
 	   }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	// --- <<IS-END-SHARED>> ---
 }
 

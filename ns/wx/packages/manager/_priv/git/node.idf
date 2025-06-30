@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <Values version="2.0">
-  <value name="node_type">interface</value>
-  <value name="node_subtype">unknown</value>
-  <value name="node_nsName">wx.packages.manager._priv.git</value>
-  <value name="is_public">false</value>
-  <value name="encodeutf8">true</value>
   <value name="shared">CQpwdWJsaWMgc3RhdGljIGZpbmFsIGNsYXNzIEN1c3RvbVNzaFNlc3Npb25GYWN0b3J5IGV4dGVu
 ZHMgU3NoZFNlc3Npb25GYWN0b3J5IHsKCgkKICAgIHByaXZhdGUgZmluYWwgUGF0aCBwcml2YXRl
 S2V5RmlsZTsKCiAgICBwdWJsaWMgQ3VzdG9tU3NoU2Vzc2lvbkZhY3RvcnkoU3RyaW5nIHByaXZh
@@ -64,11 +59,9 @@ dGUgc3RhdGljIHZvaWQgZGVsZXRlRGlyKEZpbGUgZmlsZSkgewoJICAgIEZpbGVbXSBjb250ZW50
 cyA9IGZpbGUubGlzdEZpbGVzKCk7CgkgICAgaWYgKGNvbnRlbnRzICE9IG51bGwpIHsKCSAgICAg
 ICAgZm9yIChGaWxlIGYgOiBjb250ZW50cykgewoJICAgICAgICAgICAgaWYgKCEgRmlsZXMuaXNT
 eW1ib2xpY0xpbmsoZi50b1BhdGgoKSkpIHsKCSAgICAgICAgICAgICAgICBkZWxldGVEaXIoZik7
-CgkgICAgICAgICAgICB9CgkgICAgICAgIH0KCSAgICB9CgkgICAgZmlsZS5kZWxldGUoKTsKCX0=
-</value>
-  <value name="extends"></value>
-  <array name="implements" type="value" depth="1">
-  </array>
+CgkgICAgICAgICAgICB9CgkgICAgICAgIH0KCSAgICB9CgkgICAgZmlsZS5kZWxldGUoKTsKCX0K
+CQoJCgkKCQoJCgk=</value>
+  <value name="encodeutf8">true</value>
   <array name="imports" type="value" depth="1">
     <value>java.io.File</value>
     <value>java.io.IOException</value>
@@ -77,6 +70,7 @@ CgkgICAgICAgICAgICB9CgkgICAgICAgIH0KCSAgICB9CgkgICAgZmlsZS5kZWxldGUoKTsKCX0=
     <value>java.util.ArrayList</value>
     <value>java.util.Collection</value>
     <value>java.util.Collections</value>
+    <value>java.util.HashMap</value>
     <value>java.util.List</value>
     <value>java.util.Map</value>
     <value>org.eclipse.jgit.api.CloneCommand</value>
@@ -103,9 +97,14 @@ CgkgICAgICAgICAgICB9CgkgICAgICAgIH0KCSAgICB9CgkgICAgZmlsZS5kZWxldGUoKTsKCX0=
     <value>org.eclipse.jgit.transport.SshSessionFactory</value>
     <value>org.eclipse.jgit.transport.SshTransport</value>
     <value>org.eclipse.jgit.transport.Transport</value>
+    <value>org.eclipse.jgit.transport.TransportHttp</value>
     <value>org.eclipse.jgit.transport.URIish</value>
     <value>org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider</value>
     <value>org.eclipse.jgit.transport.sshd.SshdSessionFactory</value>
     <value>org.eclipse.jgit.util.FS</value>
+    <value>com.wm.util.JournalLogger</value>
+  </array>
+  <value name="extends"></value>
+  <array name="implements" type="value" depth="1">
   </array>
 </Values>

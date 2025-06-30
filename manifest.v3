@@ -3,8 +3,8 @@
 <Values version="2.0">
   <value name="enabled">yes</value>
   <value name="system_package">no</value>
-  <value name="version">1.2.3</value>
-  <value name="build">114</value>
+  <value name="version">1.3.0</value>
+  <value name="build">879</value>
   <record name="startup_services" javaclass="com.wm.util.Values">
     <null name="wx.packages.manager._priv:startup"/>
   </record>
@@ -40,4 +40,6 @@ authentication.</value>
       <value name="value">wpm,packages,containers</value>
     </record>
   </array>
+  <value name="jvm_version">11</value>
+  <value name="publisher">IBM</value>
 </Values>

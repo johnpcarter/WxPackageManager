@@ -172,7 +172,7 @@
   </record>
   <value name="node_comment"></value>
   <value name="stateless">yes</value>
-  <value name="caching">yes</value>
+  <value name="caching">no</value>
   <value name="prefetch">no</value>
   <value name="cache_ttl">60</value>
   <value name="prefetch_level">1</value>
@@ -185,8 +185,306 @@
   <value name="svc_in_validator_options">none</value>
   <value name="svc_out_validator_options">none</value>
   <value name="auditoption">0</value>
-  <null name="auditfields_input"/>
-  <null name="auditfields_output"/>
+  <array name="auditfields_input" type="value" depth="2">
+    <array type="value" depth="1">
+      <value>/gitPassword;1;0</value>
+      <value>gitPassword</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/gitUser;1;0</value>
+      <value>gitUser</value>
+    </array>
+  </array>
+  <array name="auditfields_output" type="value" depth="2">
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/followers_url;1;0</value>
+      <value>followers_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/events_url;1;0</value>
+      <value>events_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/comment_count;3.7;0</value>
+      <value>comment_count</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/html_url;1;0</value>
+      <value>html_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/sha;1;0</value>
+      <value>sha</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/committer;2;0/date;1;0</value>
+      <value>date</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/subscriptions_url;1;0</value>
+      <value>subscriptions_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/contents_url;1;0</value>
+      <value>contents_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/verification;2;0/verified;3.1;0</value>
+      <value>verified</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/gists_url;1;0</value>
+      <value>gists_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/url;1;0</value>
+      <value>url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/avatar_url;1;0</value>
+      <value>avatar_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/stats;2;0/deletions;3.7;0</value>
+      <value>deletions</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/repos_url;1;0</value>
+      <value>repos_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/url;1;0</value>
+      <value>url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/url;1;0</value>
+      <value>url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/sha;1;0</value>
+      <value>sha</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/starred_url;1;0</value>
+      <value>starred_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/author;2;0/email;1;0</value>
+      <value>email</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/received_events_url;1;0</value>
+      <value>received_events_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/stats;2;0/additions;3.7;0</value>
+      <value>additions</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/html_url;1;0</value>
+      <value>html_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/node_id;1;0</value>
+      <value>node_id</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/raw_url;1;0</value>
+      <value>raw_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/id;3.7;0</value>
+      <value>id</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/following_url;1;0</value>
+      <value>following_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/events_url;1;0</value>
+      <value>events_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/additions;3.7;0</value>
+      <value>additions</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/parents;2;1/html_url;1;0</value>
+      <value>html_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/deletions;3.7;0</value>
+      <value>deletions</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/author;2;0/name;1;0</value>
+      <value>name</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/following_url;1;0</value>
+      <value>following_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/committer;2;0/email;1;0</value>
+      <value>email</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/filename;1;0</value>
+      <value>filename</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/organizations_url;1;0</value>
+      <value>organizations_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/gravatar_id;1;0</value>
+      <value>gravatar_id</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/committer;2;0/name;1;0</value>
+      <value>name</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/gists_url;1;0</value>
+      <value>gists_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/changes;3.7;0</value>
+      <value>changes</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/verification;2;0/reason;1;0</value>
+      <value>reason</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/type;1;0</value>
+      <value>type</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/subscriptions_url;1;0</value>
+      <value>subscriptions_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/url;1;0</value>
+      <value>url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/node_id;1;0</value>
+      <value>node_id</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/tree;2;0/url;1;0</value>
+      <value>url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/followers_url;1;0</value>
+      <value>followers_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/parents;2;1/sha;1;0</value>
+      <value>sha</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/parents;2;1/url;1;0</value>
+      <value>url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/blob_url;1;0</value>
+      <value>blob_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/repos_url;1;0</value>
+      <value>repos_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/site_admin;3.1;0</value>
+      <value>site_admin</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/author;2;0/date;1;0</value>
+      <value>date</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/node_id;1;0</value>
+      <value>node_id</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/html_url;1;0</value>
+      <value>html_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/patch;1;0</value>
+      <value>patch</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/site_admin;3.1;0</value>
+      <value>site_admin</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/tree;2;0/sha;1;0</value>
+      <value>sha</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/login;1;0</value>
+      <value>login</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/received_events_url;1;0</value>
+      <value>received_events_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/organizations_url;1;0</value>
+      <value>organizations_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/comments_url;1;0</value>
+      <value>comments_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/stats;2;0/total;3.7;0</value>
+      <value>total</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/type;1;0</value>
+      <value>type</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/committer;2;0/id;3.7;0</value>
+      <value>id</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/message;1;0</value>
+      <value>message</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/gravatar_id;1;0</value>
+      <value>gravatar_id</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/verification;2;0/signature;1;0</value>
+      <value>signature</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/starred_url;1;0</value>
+      <value>starred_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/login;1;0</value>
+      <value>login</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/author;2;0/avatar_url;1;0</value>
+      <value>avatar_url</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/files;2;1/status;1;0</value>
+      <value>status</value>
+    </array>
+    <array type="value" depth="1">
+      <value>/commitInfo;4;0;wx.packages.manager._priv.git:Commit/commit;2;0/verification;2;0/payload;1;0</value>
+      <value>payload</value>
+    </array>
+  </array>
   <record name="auditsettings" javaclass="com.wm.util.Values">
     <value name="document_data">0</value>
     <value name="startExecution">false</value>
@@ -218,7 +516,7 @@
     <value>PUT</value>
     <value>PATCH</value>
   </array>
-  <value name="pipeline_option">1</value>
+  <value name="pipeline_option">2</value>
   <null name="originURI"/>
   <value name="modifiable">true</value>
   <value name="is_public">false</value>

@@ -16,5 +16,6 @@
     <array name="rec_fields" type="record" depth="1">
     </array>
     <value name="modifiable">false</value>
+    <value name="updateRSD">true</value>
   </record>
 </Values>

@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.jgit.api.CloneCommand;
@@ -40,10 +41,12 @@ import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.SshSessionFactory;
 import org.eclipse.jgit.transport.SshTransport;
 import org.eclipse.jgit.transport.Transport;
+import org.eclipse.jgit.transport.TransportHttp;
 import org.eclipse.jgit.transport.URIish;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.eclipse.jgit.transport.sshd.SshdSessionFactory;
 import org.eclipse.jgit.util.FS;
+import com.wm.util.JournalLogger;
 // --- <<IS-END-IMPORTS>> ---
 
 public final class git
@@ -66,6 +69,7 @@ public final class git
         throws ServiceException
 	{
 		// --- <<IS-START(cloneGitRepo)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required uri
 		// [i] field:0:optional repoName
@@ -75,6 +79,19 @@ public final class git
 		// [i] field:0:required localDir
 		// [i] field:0:optional privateKeyFile
 		// [i] field:0:optional passPhrase
+		// [i] record:0:optional auth
+		// [i] - field:0:optional type
+		// [i] - field:0:optional user
+		// [i] - field:0:optional pass
+		// [i] - field:0:optional delegation {"none","kerberos"}
+		// [i] - field:0:optional token
+		// [i] - record:0:optional kerberos
+		// [i] -- field:0:optional jaasContext
+		// [i] -- field:0:optional clientPrincipal
+		// [i] -- field:0:optional clientPassword
+		// [i] -- field:0:optional servicePrincipal
+		// [i] -- field:0:optional servicePrincipalForm
+		// [i] -- field:0:optional requestDelegatableToken {"true","false"}
 		// pipeline in
 		
 		IDataCursor cursor = pipeline.getCursor();
@@ -86,6 +103,7 @@ public final class git
 		String localDirStr = IDataUtil.getString(cursor, "localDir");
 		String pathToPrivateKey = IDataUtil.getString(cursor, "privateKeyFile");
 		String passPhrase = IDataUtil.getString(cursor, "passPhrase");
+		IData inDoc = IDataUtil.getIData(cursor, "auth" );
 		
 		// process
 		
@@ -118,15 +136,34 @@ public final class git
 		if (pathToPrivateKey != null) {
 					 
 			 if (uri.startsWith("http")) {
-				 String[] parts = wx.packages.manager._priv.tools.splitUri(uri);
-				 String owner = parts[0];
-			     repo = parts[1];
+		
+		
+				// input
+				IData input = IDataFactory.create();
+				IDataCursor inputCursor = input.getCursor();
+				IDataUtil.put( inputCursor, "url", uri );
+				inputCursor.destroy();
+		
+				// output
+				IData 	output = IDataFactory.create();
+				try{
+					output = Service.doInvoke( "wx.packages.manager._priv.tools", "splitUrl", input );
+				}catch( Exception e){}
+				IDataCursor outputCursor = output.getCursor();
+				String	owner = IDataUtil.getString( outputCursor, "owner" );
+				repo = IDataUtil.getString( outputCursor, "repo" );
+				String	repoHost = IDataUtil.getString( outputCursor, "repoHost" );
+				outputCursor.destroy();
+		
 			     
-			     uri = "git@github.com:" + owner + "/" + repo + ".git";
+			     uri = "git@" + repoHost + ":" + owner + "/" + repo + ".git";
 			     
 				 c.setURI(uri);
 		
 				System.out.println("Nope, now cloning from " + uri);
+				
+				JournalLogger.log(4,90,3,"[WPM]", "Selected Github clone URI: " + uri);
+		
 			 } else {
 				c.setURI(uri);
 			 }
@@ -146,9 +183,29 @@ public final class git
 					   }
 			});
 		
-		} else if (user != null && password != null) {
+		} else if (inDoc != null) {
+			IDataCursor inDocCursor = inDoc.getCursor();
+			String authType = IDataUtil.getString( inDocCursor, "type" );			
+			inDocCursor.destroy();
+			
+			CredentialsProvider credsProvider = null;
+			
+			if ("bearer".equalsIgnoreCase(authType)) {
+				String token = IDataUtil.getString(inDocCursor, "token");				
+				credsProvider = new UsernamePasswordCredentialsProvider(token, token);
+				JournalLogger.log(4,90,3,"[WPM]", String.format("Selected Github App authentication: %s %s", uri, "*"));
+				
+			} else {
+				user = IDataUtil.getString(inDocCursor, "user");
+				password = IDataUtil.getString(inDocCursor, "pass");
+				if (user != null && !user.equals("null")) {
+					credsProvider = new UsernamePasswordCredentialsProvider(user, password);
+					JournalLogger.log(4,90,3,"[WPM]", String.format("Selected Github creds: %s %s %s", uri, user, "*"));
+		
+				}				
+			}
+			c.setCredentialsProvider(credsProvider);
 			c.setURI(uri);
-			c.setCredentialsProvider(new UsernamePasswordCredentialsProvider(user, password));
 		} else {
 			c.setURI(uri);
 		}
@@ -182,6 +239,10 @@ public final class git
 		
 		cursor.destroy();
 			
+			
+			
+			
+			
 		// --- <<IS-END>> ---
 
                 
@@ -193,39 +254,65 @@ public final class git
         throws ServiceException
 	{
 		// --- <<IS-START(tags)>> ---
+		// @subtype unknown
 		// @sigtype java 3.5
 		// [i] field:0:required gitUrl
 		// [i] field:0:optional gitUser
 		// [i] field:0:optional gitPassword
 		// [i] field:0:optional tag
+		// [i] record:0:optional auth
+		// [i] - field:0:optional type
+		// [i] - field:0:optional user
+		// [i] - field:0:optional pass
+		// [i] - field:0:optional delegation {"none","kerberos"}
+		// [i] - field:0:optional token
+		// [i] - record:0:optional kerberos
+		// [i] -- field:0:optional jaasContext
+		// [i] -- field:0:optional clientPrincipal
+		// [i] -- field:0:optional clientPassword
+		// [i] -- field:0:optional servicePrincipal
+		// [i] -- field:0:optional servicePrincipalForm
+		// [i] -- field:0:optional requestDelegatableToken {"true","false"}
 		// [o] field:1:required tags
 		IDataCursor c = pipeline.getCursor();
+		CredentialsProvider credsProvider = null;
+		// inDoc
+		IData inDoc = IDataUtil.getIData( c, "auth" );
 		String url = IDataUtil.getString(c, "gitUrl");
-		String user = IDataUtil.getString(c, "gitUser");
-		String password = IDataUtil.getString(c, "gitPassword");
+		String tag = IDataUtil.getString(c, "tag"); 
+		if ( inDoc != null) {
+			IDataCursor inDocCursor = inDoc.getCursor();
+			String authType = IDataUtil.getString( inDocCursor, "type" );			
+			inDocCursor.destroy();
+			
+			if ("bearer".equalsIgnoreCase(authType)) {
+				String token = IDataUtil.getString(inDocCursor, "token");				
+				credsProvider = new UsernamePasswordCredentialsProvider(token, token);
+				JournalLogger.log(4,90,3,"[WPM]", String.format("Selected Github App authentication: %s %s", url, "*"));
+				
+			} else {
+				String user = IDataUtil.getString(inDocCursor, "user");
+				String pass = IDataUtil.getString(inDocCursor, "pass");
+				if (user != null && !user.equals("null")) {
+					credsProvider = new UsernamePasswordCredentialsProvider(user, pass);
+					JournalLogger.log(4,90,3,"[WPM]", String.format("Selected Github creds: %s %s %s", url, user, "*"));
 		
-		String tag = IDataUtil.getString(c, "tag");
+				}				
+			}
+		}
+		c.destroy();			
 		
-		// process
-		
+				
+		// process		
 		ArrayList<String> tags = new ArrayList<String>();
 		
 		try {
-			Collection<Ref> map;
-			
-			if (user != null && !user.equals("null")) {
-								
-				map = Git.lsRemoteRepository()
-			        .setRemote(url)
-			        .setTags(true)
-			        .setCredentialsProvider(new UsernamePasswordCredentialsProvider(user, password))
-			        .call();
-			} else {
-				map = Git.lsRemoteRepository()
-					.setRemote(url)
-				    .setTags(true)
-				    .call();
-			}
+			Collection<Ref> map = Git.lsRemoteRepository()
+		        .setRemote(url)
+		        .setTags(true)
+		        .setCredentialsProvider(credsProvider)
+		        .call();
+		
 		    
 			for (Ref entry : map) {				
 				
@@ -251,6 +338,8 @@ public final class git
 		// pipeline out
 		
 		IDataUtil.put(c, "tags", tags.toArray(new String[tags.size()]));
+			
+			
 			
 		// --- <<IS-END>> ---
 
@@ -380,6 +469,12 @@ public final class git
 		    }
 		    file.delete();
 		}
+		
+		
+		
+		
+		
+		
 	// --- <<IS-END-SHARED>> ---
 }
 

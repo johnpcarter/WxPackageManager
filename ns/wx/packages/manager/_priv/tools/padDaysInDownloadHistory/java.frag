@@ -2,6 +2,18 @@
 
 <Values version="2.0">
   <value name="name">padDaysInDownloadHistory</value>
+  <array name="sig" type="value" depth="1">
+    <value>[i] record:1:required results</value>
+    <value>[i] - object:0:required TRACK_DATE</value>
+    <value>[i] - object:0:required DOWNLOAD_COUNT</value>
+    <value>[i] field:0:optional maxColumns</value>
+    <value>[i] field:0:optional maxPaddingInterval</value>
+    <value>[o] record:1:required paddedResults</value>
+    <value>[o] - field:0:required label</value>
+    <value>[o] - object:0:required value</value>
+  </array>
+  <value name="subtype">unknown</value>
+  <value name="sigtype">java 3.5</value>
   <value name="encodeutf8">true</value>
   <value name="body">Ly8gcGlwZWxpbmUgaW4KCklEYXRhQ3Vyc29yIHBpcGVsaW5lQ3Vyc29yID0gcGlwZWxpbmUuZ2V0
 Q3Vyc29yKCk7CQpJRGF0YVtdIHJlc3VsdHMgPSBJRGF0YVV0aWwuZ2V0SURhdGFBcnJheShwaXBl
@@ -34,5 +46,5 @@ ZGVkUmVzdWx0cy5zdWJMaXN0KHBhZGRlZFJlc3VsdHMuc2l6ZSgpIC0gbWF4Q29scywgcGFkZGVk
 UmVzdWx0cy5zaXplKCkpLnRvQXJyYXkobmV3IElEYXRhW3BhZGRlZFJlc3VsdHMuc2l6ZSgpXSkp
 Owp9IGVsc2UgewoJSURhdGFVdGlsLnB1dChwaXBlbGluZUN1cnNvciwgInBhZGRlZFJlc3VsdHMi
 LCBwYWRkZWRSZXN1bHRzLnRvQXJyYXkobmV3IElEYXRhW3BhZGRlZFJlc3VsdHMuc2l6ZSgpXSkp
-Owp9CgpwaXBlbGluZUN1cnNvci5kZXN0cm95KCk7</value>
+Owp9CgpwaXBlbGluZUN1cnNvci5kZXN0cm95KCk7Cg==</value>
 </Values>
